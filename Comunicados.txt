@@ -1,0 +1,7 @@
+Atenção: o código ainda não foi revisado, apenas os sprites estão 100% prontos. Além disso, tem que separar o "exemplo.py" e as auxiliares corretamente. Como fazer isso? Nas auxiliares deve estar apenas como criar a janela, sair do programa e o tamanho da tela. Em resumo, o que será usado no jogo todo. Já no exemplo, que planejo levar para outro lugar, estará a função andar e chamará as classes. Além disso, eu ainda não fiz a imagem do corredor se mexendo, tenho que fazer...
+O que falta programar do zero?
+-A tela inicial (escolha do personagem, salvar, criar novo ou continuar);
+-A sala;
+-O NPC (caso vá ter).
+
+OBS.: Caso alguém se lembre de mais alguma coisa, favor avisar aqui e no grupo. Não se esqueçam de fazer o código também, temos só até a SEPEX...
