@@ -4,21 +4,20 @@ A função andar mora aqui porque só faz sentido neste corredor: ela mexe na
 posição do personagem e na câmera deste vagão.
 
 Camadas, de trás para frente:
-  1. fundo do jogo (preto; depois entram os desenhos)
+  1. fundo do jogo (nuvens e estrelas repetidas em mosaico)
   2. vagão (imagem grande que desliza com a câmera)
   3. personagem
 """
 import pygame
 from pygame.locals import K_a, K_d, K_LEFT, K_RIGHT
 
-from auxiliares import carregar_imagem
+from auxiliares import carregar_imagem, carregar_fundo_do_jogo, desenhar_fundo_repetido
 from configuracoes import LARGURA, ALTURA, PASTA_AMBIENTES
 from personagem import Personagem
 
 VELOCIDADE = 200      # pixels por segundo
 LIMITE_BORDA = 90     # o personagem não passa dessa distância das pontas do vagão
 CHAO_NO_VAGAO = 220   # y do chão dentro da imagem do vagão (pés do personagem)
-COR_FUNDO_JOGO = (0, 0, 0)
 
 
 def _limitar(valor, minimo, maximo):
@@ -29,7 +28,8 @@ class Corredor:
     def __init__(self, personagem="rita"):
         self.fundo_vagao = carregar_imagem(PASTA_AMBIENTES / "corredor/png/corredorCompleto.png")
         self.largura_vagao = self.fundo_vagao.get_width()
-        # o vagão (256 de altura) fica centralizado na tela; sobra faixa preta em cima e embaixo
+        self.fundo_jogo = carregar_fundo_do_jogo()
+        # o vagão (256 de altura) fica centralizado na tela; em cima e embaixo aparece o fundo do jogo
         self.vagao_y = (ALTURA - self.fundo_vagao.get_height()) // 2
 
         self.personagem = Personagem(personagem)
@@ -80,7 +80,7 @@ class Corredor:
     # --- desenho -----------------------------------------------------------
 
     def desenhar(self, tela):
-        tela.fill(COR_FUNDO_JOGO)                                # 1. fundo do jogo
+        desenhar_fundo_repetido(tela, self.fundo_jogo)           # 1. fundo do jogo
         tela.blit(self.fundo_vagao, (-self.camera_x, self.vagao_y))  # 2. vagão
         self.personagem.desenhar(                                # 3. personagem
             tela, self.camera_x, self.vagao_y + CHAO_NO_VAGAO

@@ -7,7 +7,7 @@ import sys
 import pygame
 from pygame.locals import QUIT, KEYDOWN, K_ESCAPE, K_F11
 
-from configuracoes import TITULO, LARGURA, ALTURA
+from configuracoes import TITULO, LARGURA, ALTURA, PASTA_AMBIENTES
 
 
 def iniciar():
@@ -55,3 +55,16 @@ def tratar_eventos():
 
 def carregar_imagem(caminho):
     return pygame.image.load(str(caminho)).convert_alpha()
+
+
+def carregar_fundo_do_jogo():
+    """Carrega a imagem pequena (nuvens e estrelas) que se repete atrás de tudo."""
+    return carregar_imagem(PASTA_AMBIENTES / "fundoDoJogo.png")
+
+
+def desenhar_fundo_repetido(tela, imagem):
+    """Cobre a tela inteira repetindo a imagem lado a lado (em mosaico)."""
+    largura, altura = imagem.get_size()
+    for x in range(0, tela.get_width(), largura):
+        for y in range(0, tela.get_height(), altura):
+            tela.blit(imagem, (x, y))
